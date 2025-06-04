@@ -1,0 +1,17 @@
+/* Basic Reset */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#ff7e5f,#feb47b);color:hsl(0,0%,20%);min-height:100vh;display:flex;flex-direction:column}
+header,nav,main,footer{width:100%}
+header{background:rgba(255,255,255,0.8);box-shadow:0 2px 4px rgba(0,0,0,0.3);padding:1rem;text-align:center}
+nav a{margin:0 0.5rem;color:hsl(0,0%,20%);text-decoration:none;transition:color .3s}
+nav a:hover{color:#ff7e5f}
+.container{flex:1;padding:1rem;max-width:800px;margin:auto}
+.card{background:#fff;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1);padding:1rem;margin-bottom:1rem;transition:transform .3s}
+.card:hover{transform:scale(1.03)}
+.btn{display:inline-block;padding:0.5rem 1rem;background:#ff7e5f;color:#fff;text-decoration:none;border-radius:4px;transition:background .3s}
+.btn:hover{background:#feb47b}
+form{display:flex;flex-direction:column;gap:0.5rem}
+input,textarea{padding:0.5rem;border:1px solid #ccc;border-radius:4px}
+@media(max-width:600px){nav{display:flex;flex-direction:column;align-items:center}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fade-in{animation:fadeIn 1s ease-in}
