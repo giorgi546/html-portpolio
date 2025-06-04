@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <main class="container">
+        <form class="card" id="loginForm">
+            <label>Email<input type="email" name="email" required></label>
+            <label>Password<input type="password" name="password" required></label>
+            <button class="btn" type="submit">Login</button>
+        </form>
+    </main>
+    <script src="/js/jquery.js"></script>
+    <script>
+    $('#loginForm').on('submit',function(e){
+        e.preventDefault();
+        fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:this.email.value,password:this.password.value})}).then(r=>r.json()).then(d=>{alert(d.message);if(d.success)window.location='/dashboard.html';});
+    });
+    </script>
+</body>
+</html>

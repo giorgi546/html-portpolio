@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <main class="container" id="dash">
+        <div class="card">
+            <h2>Upload File</h2>
+            <form id="uploadForm">
+                <input type="file" name="file" required>
+                <button class="btn" type="submit">Upload</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Your Files</h2>
+            <ul id="fileList"></ul>
+        </div>
+    </main>
+    <script src="/js/jquery.js"></script>
+    <script>
+    $.ready(function(){
+        fetch('/api/files').then(r=>r.json()).then(list=>{
+            const ul=document.getElementById('fileList');
+            ul.innerHTML='';
+            list.forEach(f=>{const li=document.createElement('li');li.textContent=f.filename;ul.appendChild(li);});
+        });
+    });
+    $('#uploadForm').on('submit',function(e){
+        e.preventDefault();
+        const file=this.file.files[0];
+        const reader=new FileReader();
+        reader.onload=()=>{
+            fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:file.name,content:reader.result})}).then(r=>r.json()).then(()=>location.reload());
+        };
+        reader.readAsDataURL(file);
+    });
+    </script>
+</body>
+</html>
